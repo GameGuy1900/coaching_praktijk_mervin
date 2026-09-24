@@ -1,0 +1,333 @@
+/* ---------- tokens ---------- */
+:root {
+  --paper: #EDE9E2;
+  --paper-deep: #E4DFD4;
+  --ink: #1F2A24;
+  --ink-soft: #3C453F;
+  --accent: #B8863B;
+  --accent-deep: #8C6529;
+  --rail: #C9C2B0;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --sans: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --max: 640px;
+  --pad: clamp(1.5rem, 5vw, 3rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2 {
+  font-family: var(--serif);
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+p { margin: 0 0 1.15em; }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: var(--accent-deep);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 3px;
+}
+
+.col-narrow {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+.section {
+  padding: clamp(3.5rem, 9vw, 6.5rem) 0;
+  position: relative;
+}
+
+/* alternate very subtle deeper tone every other section for quiet rhythm,
+   not decoration - marks a shift in the narrative (personal -> professional -> practice) */
+.section--path,
+.section--practice,
+.section--vision {
+  background: var(--paper-deep);
+}
+
+.lede {
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* ---------- hero ---------- */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.hero-path {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='1200' viewBox='0 0 800 1200'%3E%3Cpath d='M-50 1250 C 150 1000, 50 850, 250 700 S 500 450, 350 300 S 650 100, 550 -50' stroke='%23C9C2B0' stroke-width='2' fill='none' opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right -100px top;
+  background-size: 55% auto;
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+  margin-bottom: 2rem;
+}
+
+.hero-line {
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  line-height: 1.18;
+}
+
+.hero-line--em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--ink-soft);
+  margin-top: 0.6rem;
+  font-weight: 400;
+}
+
+.hero-cta {
+  display: inline-block;
+  margin-top: 3rem;
+  font-family: var(--sans);
+  font-weight: 500;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 2px;
+}
+
+.hero-cta:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+/* ---------- headings within sections ---------- */
+.section h2 {
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  margin-bottom: 1.1em;
+}
+
+/* ---------- path rail (personal recovery + timeline sections) ---------- */
+.section--path {
+  padding-left: 0;
+}
+
+.path-rail {
+  position: absolute;
+  top: clamp(3.5rem, 9vw, 6.5rem);
+  bottom: clamp(3.5rem, 9vw, 6.5rem);
+  left: calc(50% - var(--max) / 2 + var(--pad) - 28px);
+  width: 2px;
+  background: var(--rail);
+}
+
+.path-content { position: relative; }
+
+@media (max-width: 720px) {
+  .path-rail { display: none; }
+}
+
+/* ---------- timeline ---------- */
+.timeline {
+  list-style: none;
+  margin: 2.5rem auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+  border-left: 2px solid var(--rail);
+  max-width: calc(var(--max) + 1px);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 2.4rem;
+}
+
+.timeline-item:last-child { padding-bottom: 0; }
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--pad) - 5px);
+  top: 0.4em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.timeline-year {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--accent-deep);
+  margin-bottom: 0.4rem;
+}
+
+.opleidingen {
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rail);
+  padding-top: 1.4rem;
+  margin-top: 1.6rem;
+}
+
+/* ---------- quotes & pull statements ---------- */
+.pull {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin-top: 1.6rem;
+}
+
+blockquote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 1.8rem 0;
+  padding-left: 1.3rem;
+  border-left: 2px solid var(--accent);
+  color: var(--ink);
+}
+
+/* ---------- focus list (coaching topics - genuinely a list, not numbered) ---------- */
+.focus-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.focus-list li {
+  padding: 0.7em 0;
+  border-bottom: 1px solid var(--rail);
+}
+
+.focus-list li:first-child { border-top: 1px solid var(--rail); }
+
+/* ---------- "not this, but this" rhythm block ---------- */
+.not-list {
+  margin: 2.2rem 0;
+  padding: 1.6rem clamp(1.4rem, 4vw, 2.2rem);
+  background: rgba(255,255,255,0.35);
+  border-radius: 2px;
+}
+
+.not-list p { margin-bottom: 0.6em; }
+.not-list p:last-child { margin-bottom: 0; color: var(--ink); font-weight: 500; }
+
+/* ---------- reflective question stack ---------- */
+.question-stack {
+  margin-top: 1.6rem;
+  padding-left: 1.3rem;
+  border-left: 2px solid var(--rail);
+}
+
+.question-stack p {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  margin-bottom: 0.5em;
+  color: var(--ink-soft);
+}
+
+.question-stack__last {
+  color: var(--ink) !important;
+  font-style: italic;
+  margin-top: 0.7em !important;
+}
+
+/* ---------- identity statements (big, quiet, one at a time) ---------- */
+.identity-stack {
+  margin: 2.2rem 0;
+}
+
+.identity-stack p {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 3.6vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0.25em;
+}
+
+/* ---------- contact ---------- */
+.section--contact {
+  text-align: left;
+}
+
+.contact-link {
+  display: inline-block;
+  font-family: var(--serif);
+  font-size: 1.3rem;
+  margin: 0.8rem 0 0.6rem;
+}
+
+.contact-note {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* ---------- footer ---------- */
+.footer {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 3.5rem var(--pad) 3rem;
+}
+
+.footer p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  margin-bottom: 0.8em;
+}
+
+.footer-name {
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 0.95rem;
+  color: #C9C2B0;
+  letter-spacing: 0.01em;
+}
+
+.footer-divider { margin: 0 0.5em; color: var(--accent); }
